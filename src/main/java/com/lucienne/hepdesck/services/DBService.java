@@ -26,17 +26,15 @@ public class DBService {
 	
 	public void instanciaDB() {
 		Tecnico tec1 = new Tecnico(null, "Lucienne", "77190806024", "lu@email.com", "123");
-		Tecnico tec2 = new Tecnico(null, "Guilherme", "77190806234", "gui@email.com", "123");
 		tec1.addPerfil(Perfil.ADMIN);
+		Tecnico tec2 = new Tecnico(null, "Guilherme", "77190806234", "gui@email.com", "123");
+		
 		
 		Cliente cli1 = new Cliente(null, "Linus Torvalds", "05506620063", "linus@email.com", "123");
 		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "Primeiro chamado", tec1, cli1);
 		
-//		tecnicoRepository.saveAll(Arrays.asList(tec1));
-//		tecnicoRepository.saveAll(Arrays.asList(tec2));
-//		clienteRepository.saveAll(Arrays.asList(cli1));
-//		chamadoRepository.saveAll(Arrays.asList(c1));
+
 		
 		pessoaRepository.saveAll(Arrays.asList(tec1, tec2, cli1));
 		chamadoRepository.saveAllAndFlush(Arrays.asList(c1));
