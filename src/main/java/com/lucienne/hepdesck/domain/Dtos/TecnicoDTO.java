@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucienne.hepdesck.domain.Tecnico;
 import com.lucienne.hepdesck.domain.enums.Perfil;
@@ -15,9 +17,13 @@ public class TecnicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	protected Integer id;
+	@NotNull(message = "O caompo NOME é requerido")
 	protected String nome;
+	@NotNull(message = "O caompo CPF é requerido")
 	protected String cpf;
+	@NotNull(message = "O caompo EMAIL é requerido")
 	protected String email;
+	@NotNull(message = "O caompo SENHA é requerido")
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
 	
@@ -26,6 +32,7 @@ public class TecnicoDTO implements Serializable {
 
 	public TecnicoDTO() {
 		super();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public TecnicoDTO(Tecnico obj) {
@@ -37,6 +44,7 @@ public class TecnicoDTO implements Serializable {
 		this.senha = obj.getSenha();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -95,6 +103,9 @@ public class TecnicoDTO implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 	
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(perfil.getCodigo());
+	}
 	
 	
 
